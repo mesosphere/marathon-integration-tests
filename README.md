@@ -1,7 +1,8 @@
 # marathon-integration-tests
 
 ## Overview
-Does X, Y, and Z
+
+A collection of [Gatling](http://gatling.io) simulations for [Marathon](http://github.com/mesosphere/marathon).
 
 ## Usage
 
