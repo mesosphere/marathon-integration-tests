@@ -3,12 +3,12 @@ package mesosphere.marathon.integration
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-class GetTasks extends Sim {
+class LoadTestGetTasks extends Sim {
 
   val endpoint = "/v2/tasks"
 
   val s0 =
-    scenario("GetTasks")
+    scenario("LoadTestGetTasks")
       .exec(
         http("get_v2_tasks")
           .get(endpoint)
