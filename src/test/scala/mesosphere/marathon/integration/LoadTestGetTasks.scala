@@ -7,16 +7,15 @@ class LoadTestGetTasks extends Sim {
 
   val endpoint = "/v2/tasks"
 
-  val s0 =
+  setUp(s0.inject(atOnceUsers(1000)))
+    .protocols(httpConf)
+
+  lazy val s0 =
     scenario("LoadTestGetTasks")
       .exec(
         http("get_v2_tasks")
           .get(endpoint)
           .check(status is 200)
       )
-
-  setUp(s0.inject(atOnceUsers(1024 * 1024)))
-    .protocols(httpConf)
-
 }
 
