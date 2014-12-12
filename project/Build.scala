@@ -36,8 +36,9 @@ object Dependencies {
 
   val root = Seq(
     // runtime
-    gatling % "compile",
     config % "compile",
+    gatling % "compile",
+    playJson % "compile",
 
     // test
     Test.scalatest % "test",
@@ -50,17 +51,21 @@ object Dependency {
     // runtime deps versions
     val Config = "1.2.1"
     val Gatling = "2.0.3"
+    val PlayJson = "2.4.0-M2"
 
     // test deps versions
     val ScalaTest = "2.2.1"
     val GatlingTest = "1.0"
   }
 
+  val config =
+    "com.typesafe" % "config" % V.Config
+
   val gatling =
     "io.gatling.highcharts" % "gatling-charts-highcharts" % V.Gatling
 
-  val config =
-    "com.typesafe" % "config" % V.Config
+  val playJson =
+    "com.typesafe.play" %% "play-json" % V.PlayJson
 
   object Test {
     val scalatest =
