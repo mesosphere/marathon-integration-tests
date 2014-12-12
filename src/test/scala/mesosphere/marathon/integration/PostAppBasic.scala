@@ -22,25 +22,20 @@ class PostAppBasic extends Sim {
         exec(createGroup(testGroup))
           .pause(1.second)
           .exec(
-            http("post_v2_apps")
-              .post(endpoint)
-              .header("Content-Type", "application/json")
-              .queryParam("force", "true")
-              .body(StringBody(s"""
-                {
-                  "id": "$testApp",
-                  "cmd": "sleep 30",
-                  "instances": 0
-                }
-              """)).asJSON
+            createApp(Json parse s"""
+            {
+              "id": "$testApp",
+              "cmd": "sleep 30",
+              "instances": 0
+            }
+          """)
               .check(status.is(201)) // Created
               .check(
                 jsonResponse { json =>
                   json.isInstanceOf[JsObject] should equal (true)
-                  val jsObj = json.as[JsObject]
-                  val appId = jsObj \ "id"
-                  appId.isInstanceOf[JsString] should equal (true)
-                  appId.as[JsString] should equal (JsString(testApp))
+                  json \ "id" should equal (JsString(testApp))
+                  json \ "cmd" should equal (JsString("sleep 30"))
+                  json \ "instances" should equal (JsNumber(0))
                 }
               )
           )
