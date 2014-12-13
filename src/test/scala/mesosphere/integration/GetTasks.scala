@@ -1,10 +1,12 @@
-package mesosphere.marathon.integration
+package mesosphere.integration
+
+import mesosphere.integration.helpers.MarathonSim
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import play.api.libs.json._
 
-class GetTasks extends Sim {
+class GetTasks extends MarathonSim {
 
   val endpoint = "/v2/tasks"
 
@@ -20,7 +22,6 @@ class GetTasks extends Sim {
             .check(status.is(200))
             .check(
               jsonResponse { json =>
-                json.isInstanceOf[JsObject] should equal (true)
                 val jsObj = json.as[JsObject]
                 jsObj.keys should equal (Set("tasks"))
                 val tasks = jsObj \ "tasks"

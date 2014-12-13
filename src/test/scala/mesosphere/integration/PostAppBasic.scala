@@ -1,5 +1,6 @@
-package mesosphere.marathon.integration
-package mesosphere.marathon.integration
+package mesosphere.integration
+
+import mesosphere.integration.helpers.MarathonSim
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
@@ -7,7 +8,7 @@ import play.api.libs.json._
 
 import scala.concurrent.duration._
 
-class PostAppBasic extends Sim {
+class PostAppBasic extends MarathonSim {
 
   val endpoint = "/v2/apps"
   val testGroup = "/marathon/integration/test"
